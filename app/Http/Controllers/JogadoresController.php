@@ -16,9 +16,8 @@ class JogadoresController extends Controller
     {
         $jogadores = $this->jogadores_repository->getAllJogadores();
         return response()->json([
-            $jogadores,
-            200
-        ]);
+            'dados'=>$jogadores
+        ], 200);
     }
 
     /**
