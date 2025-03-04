@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome', 255);
             $table->string('posicao', 20); // Ex: Goleiro, Zagueiro, Meio-campo, Atacante
             $table->integer('nivel'); // Nível do jogador (1 a 5, por exemplo)
-            $table->string('email', 255); // Nível do jogador (1 a 5, por exemplo)
+            $table->string('email', 255)->unique(); // Nível do jogador (1 a 5, por exemplo)
             $table->timestamps();
         });
     }
