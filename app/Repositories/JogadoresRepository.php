@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\DTOs\JogadoresDTO;
 use App\Interfaces\JogadoresInterface;
 use App\Models\Jogadores;
+use App\Services\KafkaProducer;
+use Junges\Kafka\Message\Message;
 use Exception;
 
 class JogadoresRepository implements JogadoresInterface {
@@ -19,6 +21,21 @@ class JogadoresRepository implements JogadoresInterface {
         try{
 
             $jogador = Jogadores::create($dto->toArray());
+
+            if(!empty($jogador->id)){
+
+                $kafka = new KafkaProducer();
+                
+                $message = new Message(
+                    headers: [
+                        'tipo-evento' => 'jogador',
+                    ],  
+                    body: json_encode($jogador),
+                    key: 'Jogador'.$jogador->id
+                );
+    
+                $kafka->produce($message, 'JOGADOR_CRIADO');
+            }
 
             return [
                 'success' => true,
