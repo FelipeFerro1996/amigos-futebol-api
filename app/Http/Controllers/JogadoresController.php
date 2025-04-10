@@ -14,9 +14,9 @@ class JogadoresController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jogadores = $this->jogadores_repository->getAllJogadores();
+        $jogadores = $this->jogadores_repository->getAllJogadores(request:$request);
         return response()->json([
             'dados'=>$jogadores
         ], 200);

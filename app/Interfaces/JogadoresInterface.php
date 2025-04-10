@@ -6,7 +6,7 @@ use App\DTOs\JogadoresDTO;
 
 interface JogadoresInterface
 {
-    public function getAllJogadores();
+    public function getAllJogadores($request = NULL);
 
     public function create(JogadoresDTO $dto) : array;
 

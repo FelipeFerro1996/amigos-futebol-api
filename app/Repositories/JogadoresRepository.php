@@ -11,8 +11,8 @@ use Exception;
 
 class JogadoresRepository implements JogadoresInterface {
 
-    public function getAllJogadores(){
-        $jogadores = Jogadores::get();
+    public function getAllJogadores($request = NULL){
+        $jogadores = Jogadores::paginate($request->rowsPerPage??10);
         return $jogadores;
     }
 
