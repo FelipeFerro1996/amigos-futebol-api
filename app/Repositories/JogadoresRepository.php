@@ -12,8 +12,17 @@ use Exception;
 class JogadoresRepository implements JogadoresInterface {
 
     public function getAllJogadores($request = NULL){
-        $jogadores = Jogadores::paginate($request->rowsPerPage??10);
-        return $jogadores;
+        $jogadores = new Jogadores();
+
+        if(!empty($request->nome_jogador)){
+            $jogadores = $jogadores->where('nome', 'LIKE', "%{$request->nome_jogador}%");
+        }
+
+        if(!empty($request->email_jogador)){
+            $jogadores = $jogadores->where('email', 'LIKE', "%{$request->email_jogador}%");
+        }
+
+        return $jogadores->paginate($request->rowsPerPage??10);
     }
 
     public function create(JogadoresDTO $dto): array
