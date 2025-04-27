@@ -8,7 +8,7 @@ class JogadoresDTO{
         public readonly string $nome,
         public readonly string $email,
         public readonly string $posicao,
-        public readonly string $nivel
+        public readonly int $nivel
     ){}
 
     public static function fromArray(array $data): self
